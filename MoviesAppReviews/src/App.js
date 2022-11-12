@@ -1,0 +1,37 @@
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import { AuthContextProvider } from './Context/AuthContext';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Account from './pages/Account';
+import EmpListing from './EmpListing';
+import EmpCreate from './EmpCreate';
+import ProtectedRoute from './components/ProtectedRoute';
+// https://www.youtube.com/watch?v=ATz8wg6sg30
+function App() {
+  return (
+    <>
+      <AuthContextProvider>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/reviews/listreview' element={<EmpListing />}></Route>
+          <Route path='/reviews/create' element={<EmpCreate />}></Route>
+          <Route
+            path='/account'
+            element={
+              <ProtectedRoute>
+                <Account />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </AuthContextProvider>
+    </>
+  );
+}
+
+export default App;
